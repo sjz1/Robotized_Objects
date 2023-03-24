@@ -57,7 +57,7 @@ git checkout RaspberryPi_Setting
 
 
 ## 4. Height_Measuring  branch
-This Branch target to introduce "How to setting RasberryPI for our environment"
+This Branch target to introduce "How to measure Person's Height using Ultrasonic Sensor"
 
 https://github.com/sjz1/Robotized_Objects/tree/Height_Measuring  <br/>
 
@@ -68,3 +68,12 @@ git checkout Height_Measuring
 
 <br/><br/>
 
+## 5. Frontend  branch
+Build App by using Appinventor
+
+https://github.com/sjz1/Robotized_Objects/tree/Frontend  <br/>
+
+
+```bash
+git checkout Frontend
+```
