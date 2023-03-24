@@ -77,3 +77,25 @@ https://github.com/sjz1/Robotized_Objects/tree/Frontend  <br/>
 ```bash
 git checkout Frontend
 ```
+
+
+## 6. Desk  branch
+This Branch for "Desk" part
+
+https://github.com/sjz1/Robotized_Objects/tree/Desk  <br/>
+
+
+```bash
+git checkout Desk
+```
+
+
+## 6. Bookcase  branch
+This Branch for "Bookcase" part
+
+https://github.com/sjz1/Robotized_Objects/tree/Bookcase  <br/>
+
+
+```bash
+git checkout Bookcase
+```
