@@ -17,3 +17,7 @@ git checkout beginner
 
 <br/><br/>
 
+
+# 2. Dynamixel_Check branch
+This Branch target to test Dynamixel from local setting
+
