@@ -1,79 +1,34 @@
-# Robotized_Objects
-![Raspberry Pi](https://img.shields.io/badge/-RaspberryPi-C51A4A?style=for-the-badge&logo=Raspberry-Pi)
-<a href="https://www.python.org/">
-<img src="https://img.shields.io/static/v1?style=for-the-badge&message=Python&color=3776AB&logo=Python&logoColor=FFFFFF&label="/>
-<img src="https://img.shields.io/badge/Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=FFFFFF&label=">
-<img src="https://img.shields.io/badge/ROS-22314E?style=for-the-badge&logo=ROS&logoColor=FFFFFF&label=">
-
-</a><br/>
+# Robotized_App
 
 
-
-# Press Release
-## [[YTN 사이언스] 스스로 책장이 움직이는 로보틱 도서관 시스템 개발](https://m.science.ytn.co.kr/program/view.php?mcd=0082&hcd=&key=202301191652323862)
-
-## [[디지털조선일보] 현실로 등장한 해리포터 속 ‘마법 도서관’](https://digitalchosun.dizzo.com/site/data/html_dir/2023/01/19/2023011980233.html) <br/><br/><br/>
+<img width="20%" src="https://user-images.githubusercontent.com/105138423/218001070-12e98bca-7257-43e9-9c25-2be0f6b8693d.jpg"/>
+<img width="20%" src="https://user-images.githubusercontent.com/105138423/218001324-657eb03b-3f90-4803-9163-0eccdb8f329b.jpg"/>
 
 
-# Collabot project Guide <br/>
-## 1. Beginner branch
-
-#### If you attend this project at First, Please checkout the Beginner Branch <br/>
+### 1. App Inventor라는 툴 사용<br/>
 
 
-https://github.com/sjz1/Robotized_Objects/tree/beginner <br/>
+
+### 2. 블루투스 앱은 스크래치 형태로 작성 <br/>
 
 
-```bash
-git checkout beginner
-```
 
-<br/><br/>
+### 3. BM-10, BM-06 블루투스 모듈이 서로 작동되는 형태가 다른 걸로 알고 있습니다. 저는 BM-10 블루투스 모듈로 스크래치를 짰어요.<br/>
 
 
-## 2. Dynamixel_Check branch
-This Branch target to test Dynamixel from local setting
 
-https://github.com/sjz1/Robotized_Objects/tree/Dynamixel_Check <br/>
+### 4. 어플 다운 받을 때는 빌드하셔서 .apk 형태로 스마트폰 QR 코드로 받으시면 됩니다. 어플을 수정하고 싶다면 .aia 파일 형식으로 내보내거나 여실 수 있습니다.<br/>
 
 
-```bash
-git checkout Dynamixel_Check
-```
 
-<br/><br/>
-
-## 3. RaspberryPi_Setting branch
-This Branch target to introduce "How to setting RasberryPI for our environment"
-
-https://github.com/sjz1/Robotized_Objects/tree/RasberryPi_Setting <br/>
+### 5. 만약 실행이 안된다면 권한 설정 해제해주세요.<br/>
 
 
-```bash
-git checkout RaspberryPi_Setting
-```
 
-<br/><br/>
+### 6. 혹시 어플 처음 여실 때는 실행이 안된다면 경고창 무시하고 경고창 바깥 부분 터치하시면 경고창 닫힙니다. 이 때 pairing 버튼 눌러주시면 해결됩니다. 그 때부터는 어플 열 때 경고창 안떠요. <br/>
 
 
-## 4. Height_Measuring  branch
-This Branch target to introduce "How to measure Person's Height using Ultrasonic Sensor"
 
-https://github.com/sjz1/Robotized_Objects/tree/Height_Measuring  <br/>
+### 7. 주 역할이 data 값을 보내는 것이기 때문에 어플 수정하실 때에는 data 값 보내는 것만 고치시면 됩니다. <br/>
 
-
-```bash
-git checkout Height_Measuring 
-```
-
-<br/><br/>
-
-## 5. Frontend  branch
-Build App by using Appinventor
-
-https://github.com/sjz1/Robotized_Objects/tree/Frontend  <br/>
-
-
-```bash
-git checkout Frontend
-```
+### 8. 나머지는 UI, 블루투스 연결하는 스크래치 블록이므로 시간 나실 때 수정하시면 됩니다. 
