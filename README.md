@@ -8,7 +8,7 @@
 
 <img width="50%" src="https://user-images.githubusercontent.com/105138423/218003982-36a0a52b-4acc-4145-ae84-6f41bbc2168e.png"/>
 
-```
+```bash
 roscore
 ```
 
