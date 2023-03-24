@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Beginner step
 
 
@@ -16,3 +17,6 @@ https://github.com/lifefromlife/Robotized_Objects-Bookcase <br/>
 Robotized_Objects - Dynamixel_Check, RaspberryPi_Setting - Height Measuring - App/Desk - Bookcase
 
 
+=======
+# Robotized_Objects
+>>>>>>> ed1e1f30354e59b0159a9b65b0b190e39d787183
