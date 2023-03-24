@@ -16,7 +16,7 @@
 
 
 # Collabot project Guide <br/>
-# 1. Beginner branch
+## 1. Beginner branch
 
 #### If you attend this project at First, Please checkout the Beginner Branch <br/>
 
@@ -31,7 +31,7 @@ git checkout beginner
 <br/><br/>
 
 
-# 2. Dynamixel_Check branch
+## 2. Dynamixel_Check branch
 This Branch target to test Dynamixel from local setting
 
 https://github.com/sjz1/Robotized_Objects/tree/Dynamixel_Check <br/>
@@ -43,7 +43,7 @@ git checkout Dynamixel_Check
 
 <br/><br/>
 
-# 3. RaspberryPi_Setting branch
+## 3. RaspberryPi_Setting branch
 This Branch target to introduce "How to setting RasberryPI for our environment"
 
 https://github.com/sjz1/Robotized_Objects/tree/RasberryPi_Setting <br/>
@@ -55,4 +55,16 @@ git checkout RaspberryPi_Setting
 
 <br/><br/>
 
+
+## 4. Height_Measuring  branch
+This Branch target to introduce "How to setting RasberryPI for our environment"
+
+https://github.com/sjz1/Robotized_Objects/tree/Height_Measuring  <br/>
+
+
+```bash
+git checkout Height_Measuring 
+```
+
+<br/><br/>
 
