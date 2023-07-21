@@ -10,9 +10,9 @@
 
 
 # Press Release
-## [[YTN 사이언스] 스스로 책장이 움직이는 로보틱 도서관 시스템 개발](https://m.science.ytn.co.kr/program/view.php?mcd=0082&hcd=&key=202301191652323862)
+#### [[YTN 사이언스] 스스로 책장이 움직이는 로보틱 도서관 시스템 개발](https://m.science.ytn.co.kr/program/view.php?mcd=0082&hcd=&key=202301191652323862)
 
-## [[디지털조선일보] 현실로 등장한 해리포터 속 ‘마법 도서관’](https://digitalchosun.dizzo.com/site/data/html_dir/2023/01/19/2023011980233.html) <br/><br/><br/>
+#### [[디지털조선일보] 현실로 등장한 해리포터 속 ‘마법 도서관’](https://digitalchosun.dizzo.com/site/data/html_dir/2023/01/19/2023011980233.html) <br/><br/><br/>
 
 
 # Collabot project Guide <br/>
@@ -99,3 +99,16 @@ https://github.com/sjz1/Robotized_Objects/tree/Bookcase  <br/>
 ```bash
 git checkout Bookcase
 ```
+
+
+## 7. Image_Difference  branch
+This Branch for "Image_Difference" part
+Use to Decide whether or not User Picking up books 
+
+https://github.com/sjz1/Robotized_Objects/tree/BookcImage_Difference  <br/>
+
+
+```bash
+git checkout Image_Difference
+```
+
