@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>az_body_tracker</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="kdh4970@gmail.com">do</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>genmsg</depend>
+  <depend>K4A</depend>
+  <depend>K4Abt</depend>
+
+ 
+</package>

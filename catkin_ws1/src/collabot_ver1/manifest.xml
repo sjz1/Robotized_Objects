@@ -1,0 +1,15 @@
+<package>
+  <description brief="collabot_ver1">
+
+     collabot_ver1
+
+  </description>
+  <author>kist</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/collabot_ver1</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="std_msgs"/>
+
+</package>

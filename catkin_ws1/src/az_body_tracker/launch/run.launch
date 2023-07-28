@@ -1,0 +1,4 @@
+<launch>
+    <master auto="start"/>
+    <node pkg="az_body_tracker" name="az_body_tracker" type="az_body_tracker" />
+</launch>
