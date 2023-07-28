@@ -9,7 +9,7 @@
 <!-- <img src="https://img.shields.io/badge/표시할이름-색상?style=for-the-badge&logo=기술스택아이콘&logoColor=white"> -->
 
 
-<img src="https://cdn.hellodd.com/news/photo/202301/99326_316754_2030.gif" width="480" height="270">
+<img src="/home/kist/Documents/prototype.gif" width="480" height="270">
 
 <br/><br/>
 
