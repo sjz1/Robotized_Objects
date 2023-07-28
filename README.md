@@ -1,17 +1,23 @@
 # Robotized_Objects
+<p align="center">
+<img src="https://github.com/sjz1/Robotized_Objects/assets/68888169/2f759c2b-65b9-4c2b-b4a4-40fa2b08af4b">
+</p>
+
+<br/>
+
 ![Raspberry Pi](https://img.shields.io/badge/-RaspberryPi-C51A4A?style=for-the-badge&logo=Raspberry-Pi)
 <a href="https://www.python.org/">
 <img src="https://img.shields.io/static/v1?style=for-the-badge&message=Python&color=3776AB&logo=Python&logoColor=FFFFFF&label="/>
+<img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white">
 <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white">
 <img src="https://img.shields.io/badge/Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=FFFFFF&label=">
 <img src="https://img.shields.io/badge/ROS-22314E?style=for-the-badge&logo=ROS&logoColor=FFFFFF&label=">
 </a><br/>
 <!-- <img src="https://img.shields.io/badge/표시할이름-색상?style=for-the-badge&logo=기술스택아이콘&logoColor=white"> -->
 
+<img src="https://github.com/sjz1/Robotized_Objects/assets/68888169/9c4a15ca-85da-4889-8ebf-1910bb9c906c" width="480" height="270">
 
-<img src="/home/kist/Documents/prototype.gif" width="480" height="270">
-
-<br/><br/>
+<br/>
 
 ## **Index**
 >###  [1. Press Release](#1-press-release)
@@ -20,6 +26,7 @@
 >> ### [2-2 adult scenario](#case-of-adult)
 >###  [3. Detail for config code](#detail-for-config-code)
 >###  [4. Collabot-project-branch-guide](#collabot-project-branch-guide)
+
 
 <br/><br/>
 
