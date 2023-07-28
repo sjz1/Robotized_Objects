@@ -8,10 +8,11 @@
 </a><br/>
 <!-- <img src="https://img.shields.io/badge/표시할이름-색상?style=for-the-badge&logo=기술스택아이콘&logoColor=white"> -->
 
+![prototype]()
 
-<img src="https://cdn.hellodd.com/news/photo/202301/99326_316754_2030.gif" width="480" height="270">
+<img src="https://github.com/sjz1/Robotized_Objects/assets/68888169/9c4a15ca-85da-4889-8ebf-1910bb9c906c" width="480" height="270">
 
-<br/><br/>
+<br/>
 
 ## **Index**
 >###  [1. Press Release](#1-press-release)
