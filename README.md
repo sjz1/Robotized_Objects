@@ -2,23 +2,24 @@
 ![Raspberry Pi](https://img.shields.io/badge/-RaspberryPi-C51A4A?style=for-the-badge&logo=Raspberry-Pi)
 <a href="https://www.python.org/">
 <img src="https://img.shields.io/static/v1?style=for-the-badge&message=Python&color=3776AB&logo=Python&logoColor=FFFFFF&label="/>
+<img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white">
 <img src="https://img.shields.io/badge/Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=FFFFFF&label=">
 <img src="https://img.shields.io/badge/ROS-22314E?style=for-the-badge&logo=ROS&logoColor=FFFFFF&label=">
-
 </a><br/>
+<!-- <img src="https://img.shields.io/badge/표시할이름-색상?style=for-the-badge&logo=기술스택아이콘&logoColor=white"> -->
 
 
-![Collabot](https://cdn.hellodd.com/news/photo/202301/99326_316754_2030.gif)
+<img src="https://cdn.hellodd.com/news/photo/202301/99326_316754_2030.gif" width="480" height="270">
 
 <br/><br/>
 
 ## **Index**
->###  [1. Press Release](#1-press-release) <br/>
->###  [2. Introduce](#introduce) <br/>
->> ###  [2-1 child scenario](#case-of-child) <br/>
->> ### [2-2 adult scenario](#case-of-adult) <br/>
->###  [3. Detail for config code](#detail-for-config-code)<br/>
->###  [4. Collabot-project-branch-guide](#collabot-project-branch-guide)<br/>
+>###  [1. Press Release](#1-press-release)
+>###  [2. Introduce](#introduce)
+>> ###  [2-1 child scenario](#case-of-child)
+>> ### [2-2 adult scenario](#case-of-adult)
+>###  [3. Detail for config code](#detail-for-config-code)
+>###  [4. Collabot-project-branch-guide](#collabot-project-branch-guide)
 
 <br/><br/>
 
