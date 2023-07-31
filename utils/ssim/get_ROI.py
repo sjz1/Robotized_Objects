@@ -2,8 +2,8 @@ import cv2
 import json
 
 FPS = 30
-cap = cv2.VideoCapture("./output1.avi")
-json_path = "./ROI.json"
+cap = cv2.VideoCapture("../../sample/video/ssim_test.avi")
+json_path = "../../config/ROI.json"
 
 with open(json_path, "r") as json_file:
     ROI = json.load(json_file)
@@ -19,7 +19,7 @@ with open(json_path, "r") as json_file:
 
 print("width : %d, height : %d" %(cap.get(cv2.CAP_PROP_FRAME_WIDTH) , cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
 print("\t Press r to get RoI \n\
-         Press q to Quit the terminal\
+         Press q to Quit the terminal\n\
          Press s to Save the ROI")
 
 flag= 0
@@ -43,8 +43,13 @@ while cap.isOpened():
         else:
             print("Did not save ROI")
 
+        print("\t Press r to get RoI \n\
+         Press q to Quit the terminal \n\
+         Press s to Save the ROI \n\
+              Please press several times"
+            )
         flag = 1
-        
+
     # Check the RoI
     #if flag == 1:
     #    #cv2.rectangle(frame,left top, right bottom, color(RGB), Thickness(-1:filled))

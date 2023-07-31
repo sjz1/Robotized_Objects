@@ -9,36 +9,48 @@ import pandas as pd
 from threading import Thread
 import rospy
 
-from std_msgs.msg import Float32
+from std_msgs.msg import Float32,String
 import time
 import matplotlib.pyplot as plt
 
 bookcase_num = "book1"
 
 time.sleep(6)
+
+
 class SSIM:
     def __init__(self):
         self.data = None #전역변수로 선언을 해주고
         self.grad = None
+        self.state = None 
         rospy.init_node('ssim_pub_node', anonymous=True)
         self.publisher1 = rospy.Publisher('SSIM', Float32, queue_size=10)
         self.publisher2 = rospy.Publisher('GRAD', Float32, queue_size=10)
-        
-
+        self.subscriber = rospy.Subscriber(
+            name='bookcase_state', data_class=String, callback=self.callbackFunction)
         self.rate = rospy.Rate(30) # 0.5hz
 
-    def ssim_publish(self):
-            
-            self.publisher1.publish(self.data)
+    def callbackFunction(self,msg): #기본 argument는 구독한 메세지 객체 
+        #callback : topic이 발행되는 이벤트가 발생하였을 때 event lisner함수를 콜백함수로 요구
+        self.state = msg #받아서 상태 저장만
+        
 
+    def ssim_publish(self):
+        if self.state == "open":
+            self.publisher1.publish(self.data)
             #rospy.loginfo(self.data)
-            self.rate.sleep() #100hz가 될때 까지 쉬기
+        else:
+            self.publisher1.publish(0)
+        self.rate.sleep() #100hz가 될때 까지 쉬기
 
     def diff_publish(self,current_score,past_score):
         # FPS 30 : 1/30000s -> 1frame
         sec = 1/30000
-        self.grad = abs((current_score-past_score)/sec)/1000
-        self.publisher2.publish(self.grad)
+        if self.state == "open":
+            self.grad = abs((current_score-past_score)/sec)/1000
+            self.publisher2.publish(self.grad)
+        else:
+            self.publisher2.publish(0)
         self.rate.sleep() #100hz가 될때 까지 쉬기
 
 
@@ -108,6 +120,7 @@ while cap.isOpened():
             s.diff_publish(curr_score,past_score)
 
         past_score = curr_score
+
         s.data = score
         s.ssim_publish()
 
