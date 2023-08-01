@@ -1,21 +1,13 @@
 from skimage.metrics import structural_similarity as ssim
-import imutils
 import numpy as np
-import argparse
 import cv2
 import json
 import copy
-import pandas as pd
-from threading import Thread
 import rospy
 
 from std_msgs.msg import Float32,String
-import time
-import matplotlib.pyplot as plt
 
-
-time.sleep(6)
-
+THRESHOLD = 0.65
 
 class SSIM:
     def __init__(self):
@@ -61,7 +53,12 @@ class SSIM:
 
 
 FPS = 30
-cap = cv2.VideoCapture("../../sample/video/ssim_test.avi")
+
+''' if you want to check port num
+[bash]
+ls -al /dev/video*
+'''
+cap = cv2.VideoCapture(4)
 json_path = "../../config/ROI.json"
 
 
@@ -72,7 +69,6 @@ with open(json_path, "r") as json_file:
     ROI = json.load(json_file)
 
 
-print("ROI weigh : %d , height : %d " %( ROI[bookcase_num]['x2']-ROI[bookcase_num]['x1'] , ROI[bookcase_num]['y2']-ROI[bookcase_num]['y1']))
 
 # ROI = {#(x,y) (x+w,y+h)
 #             #left top, right bottom
@@ -85,22 +81,23 @@ flag = 0
 flag_diff = 0
 curr_cap =None
 past_cap = None
-
+past_bookcase_num = ""
 s= SSIM()
 my_lst = []
-
 
 while cap.isOpened():
     _,src = cap.read()
     curr_cap = src.copy()
 
     bookcase_num = s.bookcase
-    bookcase_num = "book1" #임시 나중에 빼기
+    bookcase_num = "book2" #임시 나중에 빼기
+
+    if past_bookcase_num == "" or past_bookcase_num != bookcase_num:
+        print("ROI weigh : %d , height : %d " %( ROI[bookcase_num]['x2']-ROI[bookcase_num]['x1'] , ROI[bookcase_num]['y2']-ROI[bookcase_num]['y1']))
+        past_bookcase_num = bookcase_num
 
     if flag == 0: # pass to one frame at starting point (need of past)
         flag = 1
-
-        pass
 
     else:
         
@@ -120,8 +117,8 @@ while cap.isOpened():
         #(score, diff) = ssim(grayA, grayB,full=True)
 
         #Locally
-        (score, diff) = ssim(curr_gray, past_gray, win_size= 153 ,full=True)
-        #(score, diff) = ssim(curr_gray, past_gray, win_size= 103 ,full=True)
+        (score, diff) = ssim(curr_gray, past_gray, win_size= 63 ,full=True)
+        #(score, diff) = ssim(curr_gray, past_gray, win_size= 153 ,full=True)
         diff = (diff * 255).astype("uint8")
         
         curr_score = score
@@ -137,7 +134,7 @@ while cap.isOpened():
         s.ssim_publish()
 
         #print(f"SSIM: {score}")
-        if score < 0.80:
+        if score < THRESHOLD:
             print("DIFF!!!!!!!!!!")
         else:
             print("same")
@@ -159,7 +156,7 @@ while cap.isOpened():
                 # cv2.rectangle(src, (x, y), (x + w, y + h), (0, 0, 255), 2)
                 cv2.rectangle(src, (x+ROI[bookcase_num]['x1'], y+ROI[bookcase_num]['y1']), (x + w+ROI[bookcase_num]['x1'], y + h+ROI[bookcase_num]['y1']), (0, 0, 255), 2)
                 cv2.drawContours(curr_crop, [c], -1, (0, 0, 255), 2)
-
+        past_bookcase_num = bookcase_num
         cv2.imshow("VideoFrame", src)
         cv2.imshow("contour",curr_crop)
     past_cap = src

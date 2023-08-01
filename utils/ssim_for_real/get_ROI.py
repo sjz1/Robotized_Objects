@@ -2,7 +2,11 @@ import cv2
 import json
 
 FPS = 30
-cap = cv2.VideoCapture(2)
+''' if you want to check port num
+[bash]
+ls -al /dev/video*
+'''
+cap = cv2.VideoCapture(4)
 json_path = "../../config/ROI.json"
 
 with open(json_path, "r") as json_file:
