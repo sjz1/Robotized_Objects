@@ -13,7 +13,6 @@ from std_msgs.msg import Float32,String
 import time
 import matplotlib.pyplot as plt
 
-bookcase_num = "book1"
 
 time.sleep(6)
 
@@ -22,18 +21,25 @@ class SSIM:
     def __init__(self):
         self.data = None #전역변수로 선언을 해주고
         self.grad = None
-        self.state = None 
+        self.state = None
+        self.bookcase = None
         rospy.init_node('ssim_pub_node', anonymous=True)
         self.publisher1 = rospy.Publisher('SSIM', Float32, queue_size=10)
         self.publisher2 = rospy.Publisher('GRAD', Float32, queue_size=10)
-        self.subscriber = rospy.Subscriber(
-            name='bookcase_state', data_class=String, callback=self.callbackFunction)
+        self.subscriber1 = rospy.Subscriber(
+            name='bookcase_state', data_class=String, callback=self.callbackFunction1)
+        self.subscriber2 = rospy.Subscriber(
+            name="bookcase_num", data_class=String, callback=self.callbackFunction2)
         self.rate = rospy.Rate(30) # 0.5hz
 
-    def callbackFunction(self,msg): #기본 argument는 구독한 메세지 객체 
+    def callbackFunction1(self,msg): #기본 argument는 구독한 메세지 객체 
         #callback : topic이 발행되는 이벤트가 발생하였을 때 event lisner함수를 콜백함수로 요구
-        self.state = msg #받아서 상태 저장만
+        self.state = msg.data #받아서 상태 저장만
         
+
+    def callbackFunction2(self,msg):
+        self.bookcase = msg.data
+        #rospy.loginfo(self.bookcase)
 
     def ssim_publish(self):
         if self.state == "open":
@@ -58,6 +64,8 @@ FPS = 30
 cap = cv2.VideoCapture("../../sample/video/ssim_test.avi")
 json_path = "../../config/ROI.json"
 
+
+
 print("camera width : %d, camera height : %d" %(cap.get(cv2.CAP_PROP_FRAME_WIDTH) , cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
 
 with open(json_path, "r") as json_file:
@@ -81,9 +89,13 @@ past_cap = None
 s= SSIM()
 my_lst = []
 
+
 while cap.isOpened():
     _,src = cap.read()
     curr_cap = src.copy()
+
+    bookcase_num = s.bookcase
+    bookcase_num = "book1" #임시 나중에 빼기
 
     if flag == 0: # pass to one frame at starting point (need of past)
         flag = 1
