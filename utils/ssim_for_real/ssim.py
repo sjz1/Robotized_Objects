@@ -78,7 +78,7 @@ with open(json_path, "r") as json_file:
 
 #=======================================================================
 
-history = np.array([])
+
 flag = 0
 flag_diff = 0
 curr_cap =None
@@ -92,7 +92,7 @@ while cap.isOpened():
     curr_cap = src.copy()
 
     bookcase_num = s.bookcase
-    bookcase_num = "book2" #임시 나중에 빼기
+    #bookcase_num = "book2" #임시 나중에 빼기
 
     if past_bookcase_num == "" or past_bookcase_num != bookcase_num:
         print("ROI weigh : %d , height : %d " %( ROI[bookcase_num]['x2']-ROI[bookcase_num]['x1'] , ROI[bookcase_num]['y2']-ROI[bookcase_num]['y1']))
