@@ -7,7 +7,9 @@ import rospy
 
 from std_msgs.msg import Float32,String
 
-THRESHOLD = 0.65
+SSIM_THRESHOLD = 0.65
+GRAD_THRESHOLD = 0.65
+
 
 class SSIM:
     def __init__(self):
@@ -134,7 +136,7 @@ while cap.isOpened():
         s.ssim_publish()
 
         #print(f"SSIM: {score}")
-        if score < THRESHOLD:
+        if score < SSIM_THRESHOLD:
             print("DIFF!!!!!!!!!!")
         else:
             print("same")
