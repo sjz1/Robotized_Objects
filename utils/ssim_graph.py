@@ -13,7 +13,6 @@ parser.add_argument('--mode',help= "Select GRAD or SSIM(default = 'GRAD')",defau
 
 parser.add_argument('--ST',help= "SSIM Threshold(default = developer setting)",default = 'DEV')
 parser.add_argument('--GT',help= "GRAD Threshold(default = developer setting))",default = 'DEV')
-
 args = parser.parse_args() #
 
 
@@ -56,7 +55,7 @@ class graph:
 
 
 SSIM_THRESHOLD = 0.65
-GRAD_THRESHOLD = 0.65
+GRAD_THRESHOLD = 8
 x_max = 500
 
 '''
@@ -68,6 +67,10 @@ if args.ST != 'DEV':
 
 if args.GT != 'DEV':
     GRAD_THRESHOLD = args.GT
+
+print("ST = ", SSIM_THRESHOLD)
+print("GT = ", GRAD_THRESHOLD)
+print("mode  = ", args.mode)
 
 g = graph()
 
@@ -81,29 +84,50 @@ g = graph()
 ''' create the graph'''
 graph_x = np.array([])
 graph_y = np.array([])
+lst = [i for i in range(x_max)]
+#index = cycle(lst)
+index = count()
+
+if args.mode == "GRAD":
+    fig = plt.figure()
+    #ax = plt.axes(xlim=(30, 430), ylim=(0.7, 1))
+    ax = plt.axes(xlim=(0, x_max), ylim=(0, 15))
+    line, = ax.plot([], [], lw=3)
+else:
+    fig = plt.figure()
+    ax = plt.axes(xlim=(0, x_max), ylim=(0.3, 1))
+    line, = ax.plot([], [], lw=3)
 
 
-
-fig = plt.figure()
-ax = plt.axes(xlim=(30, x_max), ylim=(0.3, 1))
-line, = ax.plot([], [], lw=3)
-
-def animate(index,mode):
+def animate(i):
+    global args
     global ssim_score
     global graph_x
     global graph_y
     global state 
     global grad
+    global index
     if state != "open": #For only Watching graph when bookcase is opened
         score,grad,ssim_score = 0,0,0
-    if mode == 'GRAD':
+
+    if args.mode == 'GRAD':
         score = grad
-    elif mode == 'SSIM':
+    elif args.mode == 'SSIM':
         score = ssim_score
     else:
         print("Please Select the mode")
-    graph_x = np.append(graph_x,next(index))
-    graph_y = np.append(graph_y,score)
+    
+    if next(index) >= x_max:
+        index = count()
+        graph_x,graph_y= [],[]
+        anim.frame_seq = anim.new_frame_seq()
+        anim.event_source.start()
+    else:
+        graph_x = np.append(graph_x,next(index))
+        graph_y = np.append(graph_y,score)
+
+
+
     line.set_data(graph_x, graph_y)
     return line,
 
@@ -113,12 +137,14 @@ if (score == None):
     score = 0
 
 
-lst = [i for i in range(x_max)]
-index = cycle(lst)
-anim = FuncAnimation(fig, animate(index,args.mode),interval=100)
+anim = FuncAnimation(fig, animate,interval=100,repeat = True)
 #frames=200
-plt.hlines(SSIM_THRESHOLD, 0, x_max, color='green', linestyle='solid', linewidth=3)
 
+
+if args.mode == 'GRAD':
+    plt.hlines(GRAD_THRESHOLD, 0, x_max, color='green', linestyle='solid', linewidth=3)
+else:# args.mode == 'SSIM':
+    plt.hlines(SSIM_THRESHOLD, 0, x_max, color='green', linestyle='solid', linewidth=3)
 
 
 plt.show()

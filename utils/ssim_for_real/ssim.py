@@ -9,7 +9,11 @@ from std_msgs.msg import Float32,String
 
 SSIM_THRESHOLD = 0.65
 GRAD_THRESHOLD = 0.65
-
+VIDEO_NUMBER = 0
+''' if you want to check port num
+[bash]
+ls -al /dev/video*
+'''
 
 class SSIM:
     def __init__(self):
@@ -56,11 +60,8 @@ class SSIM:
 
 FPS = 30
 
-''' if you want to check port num
-[bash]
-ls -al /dev/video*
-'''
-cap = cv2.VideoCapture(4)
+
+cap = cv2.VideoCapture(VIDEO_NUMBER)
 json_path = "../../config/ROI.json"
 
 
@@ -92,7 +93,7 @@ while cap.isOpened():
     curr_cap = src.copy()
 
     bookcase_num = s.bookcase
-    #bookcase_num = "book2" #임시 나중에 빼기
+    bookcase_num = "book2" #임시 나중에 빼기
 
     if past_bookcase_num == "" or past_bookcase_num != bookcase_num:
         print("ROI weigh : %d , height : %d " %( ROI[bookcase_num]['x2']-ROI[bookcase_num]['x1'] , ROI[bookcase_num]['y2']-ROI[bookcase_num]['y1']))
