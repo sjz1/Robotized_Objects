@@ -1,3 +1,5 @@
+
+#-*- coding:utf-8 -*-	# 한글 주석을 달기 위해 사용한다.
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from itertools import count,cycle
@@ -89,7 +91,8 @@ sgraph_y = np.array([])
 lst = [i for i in range(x_max)]
 #index = cycle(lst)
 
-
+sindex = count()
+gindex = count()
 
 fig = plt.figure() #figure(도표생성)
 
@@ -149,7 +152,7 @@ def s_animate(i):
     global state 
     global sgraph_x
     global sgraph_y
-    sindex = count()
+    global sindex
     if state != "open": #For only Watching graph when bookcase is opened
         score,ssim_score = 0,0
 
@@ -173,7 +176,7 @@ def g_animate(i):
     global grad
     global ggraph_x
     global ggraph_y
-    gindex = count()
+    global gindex
 
     if state != "open": #For only Watching graph when bookcase is opened
         score,grad = 0,0

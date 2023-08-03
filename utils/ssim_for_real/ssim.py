@@ -8,8 +8,8 @@ import rospy
 from std_msgs.msg import Float32,String
 
 SSIM_THRESHOLD = 0.65
-GRAD_THRESHOLD = 0.65
-VIDEO_NUMBER = 0
+GRAD_THRESHOLD =0.65
+VIDEO_NUMBER = 2
 ''' if you want to check port num
 [bash]
 ls -al /dev/video*
