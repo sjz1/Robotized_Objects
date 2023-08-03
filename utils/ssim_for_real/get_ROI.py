@@ -6,7 +6,7 @@ FPS = 30
 [bash]
 ls -al /dev/video*
 '''
-cap = cv2.VideoCapture(4)
+cap = cv2.VideoCapture(2)
 json_path = "../../config/ROI.json"
 
 with open(json_path, "r") as json_file:
