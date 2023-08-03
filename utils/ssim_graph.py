@@ -82,71 +82,129 @@ g = graph()
 
 
 ''' create the graph'''
-graph_x = np.array([])
-graph_y = np.array([])
+ggraph_x = np.array([])
+ggraph_y = np.array([])
+sgraph_x = np.array([])
+sgraph_y = np.array([])
 lst = [i for i in range(x_max)]
 #index = cycle(lst)
-index = count()
-
-if args.mode == "GRAD":
-    fig = plt.figure()
-    #ax = plt.axes(xlim=(30, 430), ylim=(0.7, 1))
-    ax = plt.axes(xlim=(0, x_max), ylim=(0, 15))
-    line, = ax.plot([], [], lw=3)
-else:
-    fig = plt.figure()
-    ax = plt.axes(xlim=(0, x_max), ylim=(0.3, 1))
-    line, = ax.plot([], [], lw=3)
 
 
-def animate(i):
+
+fig = plt.figure() #figure(도표생성)
+
+ax1 = plt.subplot(211,xlim=(0, x_max), ylim=(0.3, 1)) #ssim
+plt.title("SSIM")
+
+ax2 = plt.subplot(212,xlim=(0, x_max), ylim=(0, 15)) #grad
+plt.title("Grad")
+
+
+line1, = ax1.plot([], [], lw=3)
+line2, = ax2.plot([], [], lw=3)
+
+# if args.mode == "GRAD":
+#     fig = plt.figure()
+#     #ax = plt.axes(xlim=(30, 430), ylim=(0.7, 1))
+#     ax = plt.axes(xlim=(0, x_max), ylim=(0, 15))
+#     line, = ax.plot([], [], lw=3)
+# else:
+#     fig = plt.figure()
+#     ax = plt.axes(xlim=(0, x_max), ylim=(0.3, 1))
+#     line, = ax.plot([], [], lw=3)
+
+
+# def animate(i):
+#     global args
+#     global ssim_score
+#     global graph_x
+#     global graph_y
+#     global state 
+#     global grad
+#     global index
+#     if state != "open": #For only Watching graph when bookcase is opened
+#         score,grad,ssim_score = 0,0,0
+
+#     if args.mode == 'GRAD':
+#         score = grad
+#     elif args.mode == 'SSIM':
+#         score = ssim_score
+#     else:
+#         print("Please Select the mode")
+    
+#     if next(index) >= x_max:
+#         index = count()
+#         graph_x,graph_y= [],[]
+#         anim.frame_seq = anim.new_frame_seq()
+#         anim.event_source.start()
+#     else:
+#         graph_x = np.append(graph_x,next(index))
+#         graph_y = np.append(graph_y,score)
+#     line.set_data(graph_x, graph_y)
+#     return line,
+
+def s_animate(i):
     global args
     global ssim_score
-    global graph_x
-    global graph_y
+    global state 
+    global sgraph_x
+    global sgraph_y
+    sindex = count()
+    if state != "open": #For only Watching graph when bookcase is opened
+        score,ssim_score = 0,0
+
+    score = ssim_score
+    
+    if next(sindex) >= x_max:
+        sindex = count()
+        sgraph_x,sgraph_y= [],[]
+        ssim_anim.frame_seq = ssim_anim.new_frame_seq()
+        ssim_anim.event_source.start()
+    else:
+        sgraph_x = np.append(sgraph_x,next(sindex))
+        sgraph_y = np.append(sgraph_y,score)
+    line1.set_data(sgraph_x, sgraph_y)
+    return line1,
+
+
+def g_animate(i):
+    global args
     global state 
     global grad
-    global index
+    global ggraph_x
+    global ggraph_y
+    gindex = count()
+
     if state != "open": #For only Watching graph when bookcase is opened
-        score,grad,ssim_score = 0,0,0
+        score,grad = 0,0
+    score = grad
 
-    if args.mode == 'GRAD':
-        score = grad
-    elif args.mode == 'SSIM':
-        score = ssim_score
+    if next(gindex) >= x_max:
+        gindex = count()
+        ggraph_x,ggraph_y= [],[]
+        grad_anim.frame_seq = grad_anim.new_frame_seq()
+        grad_anim.event_source.start()
     else:
-        print("Please Select the mode")
-    
-    if next(index) >= x_max:
-        index = count()
-        graph_x,graph_y= [],[]
-        anim.frame_seq = anim.new_frame_seq()
-        anim.event_source.start()
-    else:
-        graph_x = np.append(graph_x,next(index))
-        graph_y = np.append(graph_y,score)
-
-
-
-    line.set_data(graph_x, graph_y)
-    return line,
-
+        ggraph_x = np.append(ggraph_x,next(gindex))
+        ggraph_y = np.append(ggraph_y,score)
+    line2.set_data(ggraph_x, ggraph_y)
+    return line2,
 
 #plt.plot(graph_x,graph_y,color='blue',linestyle='-',marker='o')
 if (score == None):
     score = 0
 
 
-anim = FuncAnimation(fig, animate,interval=100,repeat = True)
+ssim_anim = FuncAnimation(fig, s_animate,interval=100,repeat = True)
+grad_anim = FuncAnimation(fig, g_animate,interval=100,repeat = True)
 #frames=200
 
 
-if args.mode == 'GRAD':
-    plt.hlines(GRAD_THRESHOLD, 0, x_max, color='green', linestyle='solid', linewidth=3)
-else:# args.mode == 'SSIM':
-    plt.hlines(SSIM_THRESHOLD, 0, x_max, color='green', linestyle='solid', linewidth=3)
+ax1.hlines(SSIM_THRESHOLD, 0, x_max, color='green', linestyle='solid', linewidth=3)
+ax2.hlines(GRAD_THRESHOLD, 0, x_max, color='green', linestyle='solid', linewidth=3)
+# args.mode == 'SSIM':
 
-
+plt.tight_layout(h_pad=3)#, w_pad=8)
 plt.show()
 
 
