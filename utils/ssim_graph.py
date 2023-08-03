@@ -57,7 +57,7 @@ class graph:
 
 
 SSIM_THRESHOLD = 0.65
-GRAD_THRESHOLD = 8
+GRAD_THRESHOLD = 30
 x_max = 500
 
 '''
@@ -99,52 +99,13 @@ fig = plt.figure() #figure(도표생성)
 ax1 = plt.subplot(211,xlim=(0, x_max), ylim=(0.3, 1)) #ssim
 plt.title("SSIM")
 
-ax2 = plt.subplot(212,xlim=(0, x_max), ylim=(0, 15)) #grad
+ax2 = plt.subplot(212,xlim=(0, x_max), ylim=(0, 60)) #grad
 plt.title("Grad")
 
 
 line1, = ax1.plot([], [], lw=3)
 line2, = ax2.plot([], [], lw=3)
 
-# if args.mode == "GRAD":
-#     fig = plt.figure()
-#     #ax = plt.axes(xlim=(30, 430), ylim=(0.7, 1))
-#     ax = plt.axes(xlim=(0, x_max), ylim=(0, 15))
-#     line, = ax.plot([], [], lw=3)
-# else:
-#     fig = plt.figure()
-#     ax = plt.axes(xlim=(0, x_max), ylim=(0.3, 1))
-#     line, = ax.plot([], [], lw=3)
-
-
-# def animate(i):
-#     global args
-#     global ssim_score
-#     global graph_x
-#     global graph_y
-#     global state 
-#     global grad
-#     global index
-#     if state != "open": #For only Watching graph when bookcase is opened
-#         score,grad,ssim_score = 0,0,0
-
-#     if args.mode == 'GRAD':
-#         score = grad
-#     elif args.mode == 'SSIM':
-#         score = ssim_score
-#     else:
-#         print("Please Select the mode")
-    
-#     if next(index) >= x_max:
-#         index = count()
-#         graph_x,graph_y= [],[]
-#         anim.frame_seq = anim.new_frame_seq()
-#         anim.event_source.start()
-#     else:
-#         graph_x = np.append(graph_x,next(index))
-#         graph_y = np.append(graph_y,score)
-#     line.set_data(graph_x, graph_y)
-#     return line,
 
 def s_animate(i):
     global args
@@ -153,10 +114,20 @@ def s_animate(i):
     global sgraph_x
     global sgraph_y
     global sindex
+    global score
+
     if state != "open": #For only Watching graph when bookcase is opened
         score,ssim_score = 0,0
 
-    score = ssim_score
+    if args.mode == "SSIM":
+        score = ssim_score
+        if (score == None):
+            score = 0
+        
+        if score < SSIM_THRESHOLD:
+            print("Diff")
+        else:
+            print("same")
     
     if next(sindex) >= x_max:
         sindex = count()
@@ -165,7 +136,7 @@ def s_animate(i):
         ssim_anim.event_source.start()
     else:
         sgraph_x = np.append(sgraph_x,next(sindex))
-        sgraph_y = np.append(sgraph_y,score)
+        sgraph_y = np.append(sgraph_y,ssim_score)
     line1.set_data(sgraph_x, sgraph_y)
     return line1,
 
@@ -177,10 +148,20 @@ def g_animate(i):
     global ggraph_x
     global ggraph_y
     global gindex
+    global score
 
     if state != "open": #For only Watching graph when bookcase is opened
         score,grad = 0,0
-    score = grad
+
+    if args.mode == "GRAD":
+        score = grad
+        if (score == None):
+            score = 0
+        
+        if score > GRAD_THRESHOLD:
+            print("Diff")
+        else:
+            print("same")
 
     if next(gindex) >= x_max:
         gindex = count()
@@ -189,14 +170,13 @@ def g_animate(i):
         grad_anim.event_source.start()
     else:
         ggraph_x = np.append(ggraph_x,next(gindex))
-        ggraph_y = np.append(ggraph_y,score)
+        ggraph_y = np.append(ggraph_y,grad)
     line2.set_data(ggraph_x, ggraph_y)
     return line2,
 
 #plt.plot(graph_x,graph_y,color='blue',linestyle='-',marker='o')
 if (score == None):
     score = 0
-
 
 ssim_anim = FuncAnimation(fig, s_animate,interval=100,repeat = True)
 grad_anim = FuncAnimation(fig, g_animate,interval=100,repeat = True)

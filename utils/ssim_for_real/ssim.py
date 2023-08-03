@@ -51,7 +51,7 @@ class SSIM:
         # FPS 30 : 1/30000s -> 1frame
         sec = 1/30000
         if self.state == "open":
-            self.grad = abs((current_score-past_score)/sec)/1000
+            self.grad = (abs((current_score-past_score)/sec)/1000)**2
             self.publisher2.publish(self.grad)
         else:
             self.publisher2.publish(0)
@@ -136,12 +136,7 @@ while cap.isOpened():
         s.data = score
         s.ssim_publish()
 
-        #print(f"SSIM: {score}")
-        if score < SSIM_THRESHOLD:
-            print("DIFF!!!!!!!!!!")
-        else:
-            print("same")
-            
+
         thresh = cv2.threshold(
                 diff, 0, 255,#200 
                 cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU
