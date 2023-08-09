@@ -31,20 +31,22 @@ ros::NodeHandle nh;
 std_msgs::String moter_num;
 std_msgs::Int32 total_count;
 std_msgs::String state;
-
+const char my_string[5] = "diff";
 
 //make publisher
 ros::Publisher sceinaro_make("bookcase_num",  &moter_num);
 ros::Publisher pub_count("count",  &total_count);
 ros::Publisher bookcase_state("bookcase_state",  &state);
 
-boolean isclose = false;
+int isclose = 1;
 
 //make callback function
 void close_cb(const std_msgs::String& cmd_msg){
   //isclose = cmd_msg.data.c_str();
-  if (cmd_msg.data == "diff"){
-    isclose = true;
+  String my_data = cmd_msg.data;
+  //if (cmd_msg.data.c_str() == my_string){
+  if (my_data.c_str() == my_string){
+    isclose = 1;
   }
    
 }
@@ -214,7 +216,7 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
@@ -234,8 +236,10 @@ void loop() {
 
       delay(3000);
       bookcase_state.publish(&state);
+      
       while(1){
-        if(isclose == true){
+        Serial.println(isclose);
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
@@ -255,7 +259,7 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
@@ -275,7 +279,7 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
@@ -296,7 +300,7 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
@@ -317,7 +321,7 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
@@ -338,7 +342,7 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
@@ -359,7 +363,7 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
@@ -380,7 +384,7 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               

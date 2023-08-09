@@ -65,7 +65,7 @@ class SSIM:
             self.publisher3.publish(self.move)
             #rospy.loginfo(self.data)
         else:
-            self.move ="same"
+            self.move ="diff"
             self.publisher3.publish(self.move)
         self.rate.sleep() #100hz가 될때 까지 쉬기
 
