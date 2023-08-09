@@ -31,20 +31,22 @@ ros::NodeHandle nh;
 std_msgs::String moter_num;
 std_msgs::Int32 total_count;
 std_msgs::String state;
-
+const char my_string[5] = "diff";
 
 //make publisher
 ros::Publisher sceinaro_make("bookcase_num",  &moter_num);
 ros::Publisher pub_count("count",  &total_count);
 ros::Publisher bookcase_state("bookcase_state",  &state);
 
-boolean isclose = false;
+int isclose = 1;
 
 //make callback function
 void close_cb(const std_msgs::String& cmd_msg){
   //isclose = cmd_msg.data.c_str();
-  if (cmd_msg.data.c_str() == 'diff'){
-    isclose = true;
+  String my_data = cmd_msg.data;
+  //if (cmd_msg.data.c_str() == my_string){
+  if (my_data.c_str() == my_string){
+    isclose = 1;
   }
    
 }
@@ -80,13 +82,12 @@ void setup() {
   nh.advertise(sceinaro_make);
   nh.advertise(pub_count);
   nh.advertise(bookcase_state);
-  nh.advertise(close_flag);
+  nh.subscribe(close_flag);
   Serial.begin(9600);
   Serial2.begin(9600);
 }
 
 void loop() {
-
   const char *log;
   dxl_wb.init(DEVICE_NAME, BAUDRATE, &log);
 
@@ -201,25 +202,6 @@ void loop() {
         sceinaro_make.publish(&moter_num);
         pub_count.publish(&total_count);
     }
-
-
-/////////////////////0808 TMP FIXED////////////////////////////////////////
-    if(data == "cart"){
-        moter_num.data = data.c_str();
-        count = 0;
-        total_count.data = count; 
-        sceinaro_make.publish(&moter_num);
-        pub_count.publish(&total_count);
-    }
-
-    if(data == "stepper"){
-        moter_num.data = data.c_str();
-        count = 0;
-        total_count.data = count; 
-        sceinaro_make.publish(&moter_num);
-        pub_count.publish(&total_count);
-    }
-/////////////////////////////////////////////////////////////////////////////////////
  
     
     if (data == "book1") {
@@ -234,13 +216,13 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[0] = 0;
-          break
+          break;
           }
       }
     }
@@ -254,14 +236,16 @@ void loop() {
 
       delay(3000);
       bookcase_state.publish(&state);
+      
       while(1){
-        if(isclose == true){
+        Serial.println(isclose);
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[1] = 0;
-          break
+          break;
           }
         }
     }
@@ -275,13 +259,13 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[2] = 0;
-          break
+          break;
           }
        }
     }
@@ -295,13 +279,13 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[3] = 0;
-          break
+          break;
           }
        }
     }
@@ -316,13 +300,13 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[4] = 0;
-          break
+          break;
           }
         }
     }
@@ -337,13 +321,13 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[5] = 0;
-          break
+          break;
           }
         }
     }
@@ -358,13 +342,13 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[6] = 0;
-          break
+          break;
           }
         }
     }
@@ -379,13 +363,13 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[7] = 0;
-          break
+          break;
           }
         }
     }
@@ -400,13 +384,13 @@ void loop() {
       delay(3000);
       bookcase_state.publish(&state);
       while(1){
-        if(isclose == true){
+        if(isclose == 1){
           state.data = "close";
           bookcase_state.publish(&state);
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[8] = 0;
-          break
+          break;
           }
         }
     }

@@ -8,7 +8,7 @@ import rospy
 from std_msgs.msg import Float32,String
 
 SSIM_THRESHOLD = 0.65
-GRAD_THRESHOLD =0.65
+GRAD_THRESHOLD =30
 VIDEO_NUMBER = 2
 ''' if you want to check port num
 [bash]
@@ -21,14 +21,14 @@ ls -al /dev/video*
 class SSIM:
     def __init__(self):
         self.data = None #전역변수로 선언을 해주고
-        self.grad = None
+        self.grad = 0
         self.state = None
         self.bookcase = None
-        self.same = "same"
+        self.move = "same"
         rospy.init_node('ssim_pub_node', anonymous=True)
         self.publisher1 = rospy.Publisher('SSIM', Float32, queue_size=10)
         self.publisher2 = rospy.Publisher('GRAD', Float32, queue_size=10)
-        self.publisher3 = rospy.Publisher('change', String,queue_size=10)
+        self.publisher3 = rospy.Publisher('change', String, queue_size=10)
         self.subscriber1 = rospy.Subscriber(
             name='bookcase_state', data_class=String, callback=self.callbackFunction1)
         self.subscriber2 = rospy.Subscriber(
@@ -62,14 +62,16 @@ class SSIM:
             self.publisher2.publish(0)
         self.rate.sleep() #100hz가 될때 까지 쉬기
 
-    def change_publish(self):
-        if self.same == "diff":
-            self.publisher3.publish(self.same)
+    def move_publish(self):
+        if self.grad > GRAD_THRESHOLD:
+            self.move = "diff"
+            self.publisher3.publish(self.move)
             #rospy.loginfo(self.data)
         else:
-            pass
-            #self.publisher3.publish(0)
+            self.move ="diff"
+            self.publisher3.publish(self.move)
         self.rate.sleep() #100hz가 될때 까지 쉬기
+
 
 
 FPS = 30
@@ -144,12 +146,16 @@ while cap.isOpened():
             pass
         else:
             s.diff_publish(curr_score,past_score)
+            s.move_publish()
 
         past_score = curr_score
 
         s.data = score
         s.ssim_publish()
 
+
+
+            
 
         thresh = cv2.threshold(
                 diff, 0, 255,#200 
