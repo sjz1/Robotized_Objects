@@ -43,7 +43,7 @@ boolean isclose = false;
 //make callback function
 void close_cb(const std_msgs::String& cmd_msg){
   //isclose = cmd_msg.data.c_str();
-  if (cmd_msg.data.c_str() == 'diff'){
+  if (cmd_msg.data == "diff"){
     isclose = true;
   }
    
@@ -80,13 +80,12 @@ void setup() {
   nh.advertise(sceinaro_make);
   nh.advertise(pub_count);
   nh.advertise(bookcase_state);
-  nh.advertise(close_flag);
+  nh.subscribe(close_flag);
   Serial.begin(9600);
   Serial2.begin(9600);
 }
 
 void loop() {
-
   const char *log;
   dxl_wb.init(DEVICE_NAME, BAUDRATE, &log);
 
@@ -201,25 +200,6 @@ void loop() {
         sceinaro_make.publish(&moter_num);
         pub_count.publish(&total_count);
     }
-
-
-/////////////////////0808 TMP FIXED////////////////////////////////////////
-    if(data == "cart"){
-        moter_num.data = data.c_str();
-        count = 0;
-        total_count.data = count; 
-        sceinaro_make.publish(&moter_num);
-        pub_count.publish(&total_count);
-    }
-
-    if(data == "stepper"){
-        moter_num.data = data.c_str();
-        count = 0;
-        total_count.data = count; 
-        sceinaro_make.publish(&moter_num);
-        pub_count.publish(&total_count);
-    }
-/////////////////////////////////////////////////////////////////////////////////////
  
     
     if (data == "book1") {
@@ -240,7 +220,7 @@ void loop() {
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[0] = 0;
-          break
+          break;
           }
       }
     }
@@ -261,7 +241,7 @@ void loop() {
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[1] = 0;
-          break
+          break;
           }
         }
     }
@@ -281,7 +261,7 @@ void loop() {
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[2] = 0;
-          break
+          break;
           }
        }
     }
@@ -301,7 +281,7 @@ void loop() {
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[3] = 0;
-          break
+          break;
           }
        }
     }
@@ -322,7 +302,7 @@ void loop() {
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[4] = 0;
-          break
+          break;
           }
         }
     }
@@ -343,7 +323,7 @@ void loop() {
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[5] = 0;
-          break
+          break;
           }
         }
     }
@@ -364,7 +344,7 @@ void loop() {
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[6] = 0;
-          break
+          break;
           }
         }
     }
@@ -385,7 +365,7 @@ void loop() {
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[7] = 0;
-          break
+          break;
           }
         }
     }
@@ -406,7 +386,7 @@ void loop() {
               
           dxl_wb.goalPosition(motor[1], (int32_t)(initial_pos[1] + 100));
           motor_open[8] = 0;
-          break
+          break;
           }
         }
     }
