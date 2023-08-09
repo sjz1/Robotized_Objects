@@ -15,15 +15,20 @@ VIDEO_NUMBER = 2
 ls -al /dev/video*
 '''
 
+
+#ros::Subscriber<std_msgs::String> close_flag("change", close_cb); // same/diff
+
 class SSIM:
     def __init__(self):
         self.data = None #전역변수로 선언을 해주고
         self.grad = None
         self.state = None
         self.bookcase = None
+        self.same = "same"
         rospy.init_node('ssim_pub_node', anonymous=True)
         self.publisher1 = rospy.Publisher('SSIM', Float32, queue_size=10)
         self.publisher2 = rospy.Publisher('GRAD', Float32, queue_size=10)
+        self.publisher3 = rospy.Publisher('change', String,queue_size=10)
         self.subscriber1 = rospy.Subscriber(
             name='bookcase_state', data_class=String, callback=self.callbackFunction1)
         self.subscriber2 = rospy.Subscriber(
@@ -55,6 +60,15 @@ class SSIM:
             self.publisher2.publish(self.grad)
         else:
             self.publisher2.publish(0)
+        self.rate.sleep() #100hz가 될때 까지 쉬기
+
+    def change_publish(self):
+        if self.same == "diff":
+            self.publisher3.publish(self.same)
+            #rospy.loginfo(self.data)
+        else:
+            pass
+            #self.publisher3.publish(0)
         self.rate.sleep() #100hz가 될때 까지 쉬기
 
 
