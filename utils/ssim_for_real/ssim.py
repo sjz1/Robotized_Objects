@@ -15,6 +15,9 @@ VIDEO_NUMBER = 2
 ls -al /dev/video*
 '''
 
+
+#ros::Subscriber<std_msgs::String> close_flag("change", close_cb); // same/diff
+
 class SSIM:
     def __init__(self):
         self.data = None #전역변수로 선언을 해주고
