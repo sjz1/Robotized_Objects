@@ -183,7 +183,26 @@ void loop() {
         sceinaro_make.publish(&moter_num);
         pub_count.publish(&total_count);
     }
-    
+
+
+/////////////////////0808 TMP FIXED////////////////////////////////////////
+    if(data == "cart"){
+        moter_num.data = data.c_str();
+        count = 0;
+        total_count.data = count; 
+        sceinaro_make.publish(&moter_num);
+        pub_count.publish(&total_count);
+    }
+
+    if(data == "stepper"){
+        moter_num.data = data.c_str();
+        count = 0;
+        total_count.data = count; 
+        sceinaro_make.publish(&moter_num);
+        pub_count.publish(&total_count);
+    }
+/////////////////////////////////////////////////////////////////////////////////////
+ 
     
     if (data == "book1") {
 
@@ -196,7 +215,7 @@ void loop() {
 
       delay(3000);
       bookcase_state.publish(&state);
-      delay(3000);
+      delay(4000);
       
       state.data = "close";
       bookcase_state.publish(&state);
@@ -215,7 +234,7 @@ void loop() {
 
       delay(3000);
       bookcase_state.publish(&state);
-      delay(3000);
+      delay(4000);
       
       state.data = "close";
       bookcase_state.publish(&state);
@@ -233,7 +252,7 @@ void loop() {
       
       delay(3000);
       bookcase_state.publish(&state);
-      delay(3000);
+      delay(4000);
 
       state.data = "close";
       bookcase_state.publish(&state);
@@ -251,7 +270,7 @@ void loop() {
       
       delay(3000);
       bookcase_state.publish(&state);
-      delay(3000);
+      delay(4000);
 
       state.data = "close";
       bookcase_state.publish(&state);
@@ -269,7 +288,7 @@ void loop() {
       
       delay(3000);
       bookcase_state.publish(&state);
-      delay(3000);
+      delay(4000);
 
       state.data = "close";
       bookcase_state.publish(&state);
@@ -287,7 +306,7 @@ void loop() {
       
       delay(3000);
       bookcase_state.publish(&state);
-      delay(3000);
+      delay(4000);
 
       state.data = "close";
       bookcase_state.publish(&state);
@@ -306,7 +325,7 @@ void loop() {
       
       delay(3000);
       bookcase_state.publish(&state);
-      delay(3000);
+      delay(4000);
 
       state.data = "close";
       bookcase_state.publish(&state);
@@ -324,7 +343,7 @@ void loop() {
 
       delay(3000);
       bookcase_state.publish(&state);
-      delay(3000);
+      delay(4000);
       
       state.data = "close";
       bookcase_state.publish(&state);
@@ -342,7 +361,7 @@ void loop() {
       
       delay(3000);
       bookcase_state.publish(&state);
-      delay(3000);
+      delay(4000);
       
       state.data = "close";
       bookcase_state.publish(&state);
