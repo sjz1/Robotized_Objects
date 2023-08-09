@@ -31,7 +31,7 @@ ros::NodeHandle nh;
 std_msgs::String moter_num;
 std_msgs::Int32 total_count;
 std_msgs::String state;
-const char my_string[5] = "diff";
+
 
 //make publisher
 ros::Publisher sceinaro_make("bookcase_num",  &moter_num);
@@ -45,7 +45,7 @@ void close_cb(const std_msgs::String& cmd_msg){
   //isclose = cmd_msg.data.c_str();
   String my_data = cmd_msg.data;
   //if (cmd_msg.data.c_str() == my_string){
-  if (my_data.c_str() == my_string){
+  if (my_data.c_str() == "diff"){
     isclose = 1;
   }
    
@@ -77,7 +77,6 @@ uint8_t motor[13] = {0, MOTOR1, MOTOR2, MOTOR3, MOTOR4, MOTOR5, MOTOR6, MOTOR7, 
 static uint32_t pre_time;
 
 void setup() {
-
   nh.initNode();
   nh.advertise(sceinaro_make);
   nh.advertise(pub_count);
@@ -385,6 +384,7 @@ void loop() {
       bookcase_state.publish(&state);
       while(1){
         if(isclose == 1){
+          nh.spinOnce();
           state.data = "close";
           bookcase_state.publish(&state);
               
@@ -397,7 +397,7 @@ void loop() {
 
         
     
-    nh.spinOnce();
+    
     //delay(10);
 
   }

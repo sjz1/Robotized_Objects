@@ -1,5 +1,3 @@
-
-#-*- coding:utf-8 -*-	# 한글 주석을 달기 위해 사용한다.
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from itertools import count,cycle
@@ -55,9 +53,8 @@ class graph:
 
 
 
-
 SSIM_THRESHOLD = 0.65
-GRAD_THRESHOLD = 30
+GRAD_THRESHOLD = 8
 x_max = 500
 
 '''
@@ -91,21 +88,19 @@ sgraph_y = np.array([])
 lst = [i for i in range(x_max)]
 #index = cycle(lst)
 
-sindex = count()
-gindex = count()
+
 
 fig = plt.figure() #figure(도표생성)
 
 ax1 = plt.subplot(211,xlim=(0, x_max), ylim=(0.3, 1)) #ssim
 plt.title("SSIM")
 
-ax2 = plt.subplot(212,xlim=(0, x_max), ylim=(0, 60)) #grad
+ax2 = plt.subplot(212,xlim=(0, x_max), ylim=(0, 15)) #grad
 plt.title("Grad")
 
 
 line1, = ax1.plot([], [], lw=3)
 line2, = ax2.plot([], [], lw=3)
-
 
 def s_animate(i):
     global args
@@ -113,21 +108,11 @@ def s_animate(i):
     global state 
     global sgraph_x
     global sgraph_y
-    global sindex
-    global score
-
+    sindex = count()
     if state != "open": #For only Watching graph when bookcase is opened
         score,ssim_score = 0,0
 
-    if args.mode == "SSIM":
-        score = ssim_score
-        if (score == None):
-            score = 0
-        
-        if score < SSIM_THRESHOLD:
-            print("Diff")
-        else:
-            print("same")
+    score = ssim_score
     
     if next(sindex) >= x_max:
         sindex = count()
@@ -136,7 +121,7 @@ def s_animate(i):
         ssim_anim.event_source.start()
     else:
         sgraph_x = np.append(sgraph_x,next(sindex))
-        sgraph_y = np.append(sgraph_y,ssim_score)
+        sgraph_y = np.append(sgraph_y,score)
     line1.set_data(sgraph_x, sgraph_y)
     return line1,
 
@@ -147,21 +132,11 @@ def g_animate(i):
     global grad
     global ggraph_x
     global ggraph_y
-    global gindex
-    global score
+    gindex = count()
 
     if state != "open": #For only Watching graph when bookcase is opened
         score,grad = 0,0
-
-    if args.mode == "GRAD":
-        score = grad
-        if (score == None):
-            score = 0
-        
-        if score > GRAD_THRESHOLD:
-            print("Diff")
-        else:
-            print("same")
+    score = grad
 
     if next(gindex) >= x_max:
         gindex = count()
@@ -170,13 +145,14 @@ def g_animate(i):
         grad_anim.event_source.start()
     else:
         ggraph_x = np.append(ggraph_x,next(gindex))
-        ggraph_y = np.append(ggraph_y,grad)
+        ggraph_y = np.append(ggraph_y,score)
     line2.set_data(ggraph_x, ggraph_y)
     return line2,
 
 #plt.plot(graph_x,graph_y,color='blue',linestyle='-',marker='o')
 if (score == None):
     score = 0
+
 
 ssim_anim = FuncAnimation(fig, s_animate,interval=100,repeat = True)
 grad_anim = FuncAnimation(fig, g_animate,interval=100,repeat = True)
