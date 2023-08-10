@@ -63,13 +63,14 @@ class SSIM:
         self.rate.sleep() #100hz가 될때 까지 쉬기
 
     def move_publish(self):
-        if self.grad > GRAD_THRESHOLD:
-            self.move = "diff"
-            self.publisher3.publish(self.move)
-            #rospy.loginfo(self.data)
-        else:
-            self.move ="same"
-            self.publisher3.publish(self.move)
+        if self.state == "open":
+            if self.grad > GRAD_THRESHOLD:
+                self.move = "diff"
+                self.publisher3.publish(self.move)
+                #rospy.loginfo(self.data)
+            else:
+                self.move ="same"
+                self.publisher3.publish(self.move)
         self.rate.sleep() #100hz가 될때 까지 쉬기
 
 
@@ -152,8 +153,6 @@ while cap.isOpened():
 
         s.data = score
         s.ssim_publish()
-
-
 
             
 
